@@ -1,0 +1,68 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          first-yocto-app
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: For learning purpose
+### END INIT INFO
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+
+NAME="first-yocto-app"
+DAEMON=/usr/bin/$NAME
+
+. /etc/init.d/functions || exit 1
+
+do_start() {
+	local status_ pid_
+
+	status_=0
+	pid_=`pidofproc $DAEMON` || status_=$?
+	case $status_ in
+	0)
+		echo "$NAME already running ($pid_)."
+		exit 1
+		;;
+	*)
+		echo "Starting $NAME ..."
+		exec $DAEMON >/dev/null 2>&1 &
+		;;
+	esac
+}
+
+do_stop() {
+	local pid_ status_
+	status_=0
+
+	pid_=`pidofproc $DAEMON` || status_=$?
+	case $status_ in
+	0)
+		kill -s 15 $pid_ >/dev/null
+		usleep 1000000
+		echo "Stopped $NAME ($pid_)."
+		;;
+	*)
+		echo "$NAME is not running; none killed."
+		;;
+	esac
+}
+
+case "$1" in
+start)
+	do_start
+	;;
+stop)
+	do_stop || exit $?
+	;;
+restart)
+	do_stop
+	do_start
+	;;
+
+*)
+	echo "Usage: $0 {start|stop|restart}" >&2
+	exit 3
+	;;
+esac
+
+exit 0
