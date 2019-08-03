@@ -1,0 +1,14 @@
+POKY_BBLAYERS_CONF_VERSION = "2"
+
+BBPATH = "${TOPDIR}"
+BSPDIR := "${@os.path.abspath(os.path.dirname(d.getvar('FILE', True)) + '/./..')}"
+
+BBFILES ?= ""
+BBLAYERS ?= " \
+  ${BSPDIR}/poky/meta \
+  ${BSPDIR}/poky/meta-poky \
+  ${BSPDIR}/poky/meta-yocto-bsp \
+  ${BSPDIR}/meta-raspberrypi \
+  ${BSPDIR}/meta-openembedded/meta-oe \
+  ${BSPDIR}/meta-yoctolearning \
+  "

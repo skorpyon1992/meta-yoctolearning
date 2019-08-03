@@ -1,0 +1,30 @@
+MACHINE ?= "raspberrypi3"
+
+DL_DIR ?= "${TOPDIR}/Downloads"
+SSTATE_DIR ?= "${TOPDIR}/sstate-cache"
+
+DISTRO ?= "poky"
+PACKAGE_CLASSES ?= "package_ipk"
+
+EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
+USER_CLASSES ?= "buildstats image-mklibs image-prelink"
+
+# By default disable interactive patch resolution (tasks will just fail instead):
+PATCHRESOLVE = "noop"
+
+# configuration for aborting bitbake in case of space memory issue
+BB_DISKMON_DIRS ??= "\
+    STOPTASKS,${TMPDIR},1G,100K \
+    STOPTASKS,${DL_DIR},1G,100K \
+    STOPTASKS,${SSTATE_DIR},1G,100K \
+    STOPTASKS,/tmp,100M,100K \
+    ABORT,${TMPDIR},100M,1K \
+    ABORT,${DL_DIR},100M,1K \
+    ABORT,${SSTATE_DIR},100M,1K \
+    ABORT,/tmp,10M,1K"
+
+CONF_VERSION = "1"
+
+BB_NUMBER_THREADS = "5"
+PARALLEL_MAKE = "-j 4"
+
