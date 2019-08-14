@@ -8,7 +8,7 @@ BBLAYERS ?= " \
   ${BSPDIR}/poky/meta \
   ${BSPDIR}/poky/meta-poky \
   ${BSPDIR}/poky/meta-yocto-bsp \
-  ${BSPDIR}/meta-raspberrypi \
+  ${BSPDIR}/meta-phytec \
   ${BSPDIR}/meta-openembedded/meta-oe \
   ${BSPDIR}/meta-yoctolearning \
   "
