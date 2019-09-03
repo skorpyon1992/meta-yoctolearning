@@ -28,3 +28,5 @@ CONF_VERSION = "1"
 BB_NUMBER_THREADS = "5"
 PARALLEL_MAKE = "-j 4"
 
+IMAGE_FSTYPES += "tar.gz ext4"
+IMAGE_BOOT_FILES_phyboard-regor-am335x-1 = "barebox.bin MLO am335x-regor-rdk.dtb;oftree"
