@@ -20,15 +20,7 @@ INITSCRIPT_PACKAGES += "${PN}"
 INITSCRIPT_NAME = "first-yocto-app"
 INITSCRIPT_PARAMS = "start 90 5 4 3 2 . stop 10 0 1 6 ."
 
-do_configure() {
-  cd ${S}
-  cmake ./
-}
 
-do_compile() {
-    cd ${S}
-    make
-}
 
 do_install() {
     install -d ${D}${bindir}
